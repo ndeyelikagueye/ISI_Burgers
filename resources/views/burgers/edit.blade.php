@@ -67,22 +67,33 @@
         @method('PUT')
 
         <label for="name">Nom:</label>
-        <input type="text" name="name" value="{{ $burger->name }}" required>
+        <input type="text" name="name" value="{{ old('name', $burger->name) }}" required>
+        @error('name') <p style="color:red;">{{ $message }}</p> @enderror
 
         <label for="price">Prix:</label>
-        <input type="number" name="price" step="0.01" value="{{ $burger->price }}" required>
+        <input type="number" name="price" step="0.01" value="{{ old('price', $burger->price) }}" required>
+        @error('price') <p style="color:red;">{{ $message }}</p> @enderror
 
         <label for="image">Image:</label>
+        @if($burger->image)
+            <div>
+                <img src="{{ asset('storage/' . $burger->image) }}" alt="Image du burger" width="150">
+            </div>
+        @endif
         <input type="file" name="image" accept="image/*">
+        @error('image') <p style="color:red;">{{ $message }}</p> @enderror
 
         <label for="description">Description:</label>
-        <textarea name="description">{{ $burger->description }}</textarea>
+        <textarea name="description">{{ old('description', $burger->description) }}</textarea>
+        @error('description') <p style="color:red;">{{ $message }}</p> @enderror
 
         <label for="stock">Stock:</label>
-        <input type="number" name="stock" value="{{ $burger->stock }}" required>
+        <input type="number" name="stock" value="{{ old('stock', $burger->stock) }}" required>
+        @error('stock') <p style="color:red;">{{ $message }}</p> @enderror
 
         <button type="submit">Mettre à jour</button>
     </form>
+
 </div>
 
 <!-- Inclure Bootstrap JS (optionnel si besoin de certaines fonctionnalités) -->
